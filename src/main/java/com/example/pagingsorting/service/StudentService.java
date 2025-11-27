@@ -12,8 +12,9 @@ public interface StudentService {
     List<Student> findAllStudents();
     Student saveStudent(Student student);
     Student findStudentById(UUID id);
-    Student findStudentByName(String name);
-    Student findStudentByEmail(String email);
-    Student updateStudent(@Nullable String name, @Nullable String email);
-    void deleteStudentById(UUID id);
+    List<Student> findStudentByName(String name);
+    List<Student> findStudentByEmail(String email);
+    List<Student> findStudentByNameAndEmail(String name, String email);
+    Boolean updateStudent(@Nullable String name, @Nullable String email, UUID id);
+    Boolean deleteStudentById(UUID id);
 }

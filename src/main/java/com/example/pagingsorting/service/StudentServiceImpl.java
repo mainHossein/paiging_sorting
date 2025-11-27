@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-
-@Service
+@Service()
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
@@ -23,31 +22,39 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student saveStudent(Student student) {
-        return null;
+        return studentRepository.save(student);
     }
 
     @Override
     public Student findStudentById(UUID id) {
-        return null;
+        return studentRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Student findStudentByName(String name) {
-        return null;
+    public List<Student> findStudentByName(String name) {
+        return studentRepository.findByNameIsLikeIgnoreCase("%" + name + "%");
     }
 
     @Override
-    public Student findStudentByEmail(String email) {
-        return null;
+    public List<Student> findStudentByEmail(String email) {
+        return studentRepository.findByEmailIsLikeIgnoreCase("%" + email + "%");
     }
 
     @Override
-    public Student updateStudent(@Nullable String name, @Nullable String email) {
-        return null;
+    public List<Student> findStudentByNameAndEmail(String name, String email) {
+        return studentRepository.findByNameIsLikeIgnoreCaseAndEmailIsLikeIgnoreCase(
+                "%" + name + "%", "%" + email + "%");
     }
 
     @Override
-    public void deleteStudentById(UUID id) {
+    public Boolean updateStudent(@Nullable String name, @Nullable String email, UUID id) {
+        int updated = studentRepository.updateNameAndEmailById(name, email, id);
+        return updated > 0;
+    }
 
+    @Override
+    public Boolean deleteStudentById(UUID id) {
+        studentRepository.deleteById(id);
+        return !studentRepository.existsById(id);
     }
 }

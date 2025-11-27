@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
-import org.springframework.context.annotation.Import;
 
 import java.util.List;
+import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DataJpaTest
-//@Import(StudentRepository.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class StudentRepositoryTest {
     @Autowired
@@ -19,19 +19,26 @@ class StudentRepositoryTest {
 
     @Test
     void findByName() {
-        List<Student> student = studentRepository.findByNameIsLikeIgnoreCase("Danie%");
+        List<Student> student = studentRepository.findByNameIsLikeIgnoreCase("daniel%");
         assertNotNull(student);
-
     }
 
     @Test
     void findByEmail() {
         List<Student> student = studentRepository.findByEmailIsLikeIgnoreCase("%Danie%");
         assertNotNull(student);
-        student.forEach(System.out::println);
+    }
+
+    @Test
+    void findByNameIsLikeIgnoreCaseAndEmailIsLikeIgnoreCase() {
+        List<Student> student = studentRepository.findByNameIsLikeIgnoreCaseAndEmailIsLikeIgnoreCase("%dav%", "%ke%");
+        assertNotNull(student);
     }
 
     @Test
     void updateNameAndEmailById() {
+        int update = studentRepository.updateNameAndEmailById("Grace Red",
+                null, UUID.fromString("36686147-0337-cfe4-c2f2-042fa1b4d0ba"));
+        assertThat(update).isEqualTo(1);
     }
 }

@@ -4,7 +4,6 @@ import com.example.pagingsorting.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -15,8 +14,10 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
 
     List<Student> findByEmailIsLikeIgnoreCase(String email);
 
+    List<Student> findByNameIsLikeIgnoreCaseAndEmailIsLikeIgnoreCase(String name, String email);
+
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("update Student s set s.name = ?1, s.email = ?2 where s.id = ?3")
-    int updateNameAndEmailById(@Nullable String name, @Nullable String email, UUID id);
+    int updateNameAndEmailById(String name, String email, UUID id);
 }
