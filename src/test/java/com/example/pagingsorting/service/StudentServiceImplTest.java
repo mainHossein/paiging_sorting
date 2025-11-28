@@ -70,7 +70,7 @@ class StudentServiceImplTest {
         Student student = studentRepository.findAll().get(0);
         System.out.println(studentRepository.findById(student.getId()));
         boolean updated = studentService.updateStudent(
-                student.getId(), );
+                student.getId(), student);
         System.out.println(studentRepository.findById(student.getId()));
         assertThat(updated).isTrue();
     }
