@@ -25,7 +25,7 @@ class StudentServiceImplTest {
 
     @Test
     void findAllStudents() {
-        List<Student> students = studentService.findAllStudents();
+        List<Student> students = studentService.findAllStudents(null, null);
         assertNotNull(students);
     }
 
@@ -70,7 +70,7 @@ class StudentServiceImplTest {
         Student student = studentRepository.findAll().get(0);
         System.out.println(studentRepository.findById(student.getId()));
         boolean updated = studentService.updateStudent(
-                "Arthur Morgan", "morganemail@gmail.com", student.getId());
+                student.getId(), );
         System.out.println(studentRepository.findById(student.getId()));
         assertThat(updated).isTrue();
     }
