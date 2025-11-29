@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,5 +43,12 @@ class StudentRepositoryTest {
         int update = studentRepository.updateNameAndEmailById("Grace Red",
                 null, UUID.fromString("36686147-0337-cfe4-c2f2-042fa1b4d0ba"));
         assertThat(update).isEqualTo(1);
+    }
+
+    @Test
+    void findAll() {
+        Page<Student> students = studentRepository.findAll(PageRequest.of(0, 10, Sort.by("email").descending()));
+        assertNotNull(students);
+        students.forEach(System.out::println);
     }
 }

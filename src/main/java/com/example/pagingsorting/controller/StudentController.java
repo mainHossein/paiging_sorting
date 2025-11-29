@@ -2,6 +2,7 @@ package com.example.pagingsorting.controller;
 
 import com.example.pagingsorting.model.Student;
 import com.example.pagingsorting.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +12,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/university/")
+@RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
 
     @GetMapping
     public List<Student> getAllStudents(@RequestParam(required = false) String name,  @RequestParam(required = false) String email) {

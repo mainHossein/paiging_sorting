@@ -2,17 +2,16 @@ package com.example.pagingsorting.service;
 
 import com.example.pagingsorting.model.Student;
 import com.example.pagingsorting.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-@Service()
+@Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
 
     @Override
     public List<Student> findAllStudents(String name, String email) {

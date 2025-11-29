@@ -1,6 +1,8 @@
 package com.example.pagingsorting.repository;
 
 import com.example.pagingsorting.model.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,4 +32,8 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
     @Modifying
     @Query("update Student s set s.email = ?1 where s.id = ?2")
     int updateEmailById(String email, UUID id);
+
+    
+    @Query("select s from Student s")
+    Page<Student> findAll(Pageable pageable);
 }
