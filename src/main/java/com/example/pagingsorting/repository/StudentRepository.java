@@ -20,7 +20,7 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("update Student s set s.name = ?1, s.email = ?2 where s.id = ?3")
+    @Query("update Student set Student.name = ?1, Student .email = ?2 where Student.id = ?3")
     int updateNameAndEmailById(String name, String email, UUID id);
 
     @Transactional
