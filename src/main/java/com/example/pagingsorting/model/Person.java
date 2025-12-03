@@ -9,7 +9,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,7 +17,7 @@ import java.util.UUID;
 public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -26,6 +25,8 @@ public abstract class Person {
     private AcademicField academicField;
     private String phoneNumber;
     private Date birthDate;
+    @Embedded
+    private Address address;
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp

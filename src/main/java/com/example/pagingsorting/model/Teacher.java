@@ -12,9 +12,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Teacher extends Person {
-    @Column(nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long teacherId;
     @Enumerated(EnumType.STRING)
     private AcademicRank academicRank;
 }

@@ -15,17 +15,17 @@ public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
     @Override
-    public List<Student> findAllStudents(String name, String email) {
+    public List<Student> findAllStudents(String firstName, String lastName) {
         List<Student> students = List.of();
-        if (name !=null && email == null){
-            students = studentRepository.findByNameIsLikeIgnoreCase(wildCardConverter(name));
-        }if (name == null && email != null) {
-            students = studentRepository.findByEmailIsLikeIgnoreCase(wildCardConverter(email));
+        if (firstName !=null && lastName == null){
+            students = studentRepository.findByFirstNameIsLikeIgnoreCase(wildCardConverter(firstName));
+        }if (firstName == null && lastName != null) {
+            students = studentRepository.findByLastNameIsLikeIgnoreCase(wildCardConverter(lastName));
 
-        }if (name != null && email != null) {
-            students = studentRepository.findByNameIsLikeIgnoreCaseAndEmailIsLikeIgnoreCase(
-                    wildCardConverter(name), wildCardConverter(email));
-        }if (name == null && email == null) {
+        }if (firstName != null && lastName != null) {
+            students = studentRepository.findByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase(
+                    wildCardConverter(firstName), wildCardConverter(lastName));
+        }if (firstName == null && lastName == null) {
             students = studentRepository.findAll();
         }
         return students;
@@ -37,24 +37,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findStudentById(UUID id) {
+    public Student findStudentById(Long id) {
         return studentRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<Student> findStudentByName(String name) {
-        return studentRepository.findByNameIsLikeIgnoreCase(wildCardConverter(name));
-    }
-
-    @Override
-    public List<Student> findStudentByEmail(String email) {
-        return studentRepository.findByEmailIsLikeIgnoreCase(wildCardConverter(email));
-    }
-
-    @Override
-    public List<Student> findStudentByNameAndEmail(String name, String email) {
-        return studentRepository.findByNameIsLikeIgnoreCaseAndEmailIsLikeIgnoreCase(
-                wildCardConverter(name), wildCardConverter(email));
     }
 
     @Override
@@ -74,7 +58,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean deleteStudentById(UUID id) {
+    public Boolean deleteStudentById(Long id) {
         studentRepository.deleteById(id);
         return !studentRepository.existsById(id);
     }

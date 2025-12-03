@@ -8,12 +8,9 @@ import java.util.UUID;
 
 @Service
 public interface StudentService {
-    List<Student> findAllStudents(String name, String email);
+    List<Student> findAllStudents(String firstName, String lastName);
     Student saveStudent(Student student);
-    Student findStudentById(UUID id);
-    List<Student> findStudentByName(String name);
-    List<Student> findStudentByEmail(String email);
-    List<Student> findStudentByNameAndEmail(String name, String email);
+    Student findStudentById(Long id);
     Boolean updateStudent(UUID id, Student student);
-    Boolean deleteStudentById(UUID id);
+    Boolean deleteStudentById(Long id);
 }

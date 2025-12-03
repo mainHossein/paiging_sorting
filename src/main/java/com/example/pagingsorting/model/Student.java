@@ -14,7 +14,5 @@ import java.util.UUID;
 @ToString
 @NoArgsConstructor
 public class Student extends Person{
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true)
-    private Long studentId;
+
 }
