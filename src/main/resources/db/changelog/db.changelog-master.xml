@@ -3,9 +3,9 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="db/changelog/db.changelog-init-table-student.xml"/>
-    <include file="db/changelog/db.changelog-insert-data-in-student.xml"/>
-
+    <include file="/db/changelog/create-table/db.changelog-create-student-table.xml"/>
+    <include file="/db/changelog/create-table/db.changelog-create-teacher-table.xml"/>
+    <include file="/db/changelog/alter-table/db.changelog-auto-increment-id.xml"/>
 </databaseChangeLog>

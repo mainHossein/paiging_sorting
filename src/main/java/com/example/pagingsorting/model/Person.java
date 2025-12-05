@@ -7,16 +7,17 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
 @ToString
 @MappedSuperclass
-public abstract class Person {
+public abstract class
+Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -24,7 +25,7 @@ public abstract class Person {
     @Enumerated(EnumType.STRING)
     private AcademicField academicField;
     private String phoneNumber;
-    private Date birthDate;
+    private LocalDate birthDate;
     @Embedded
     private Address address;
     @CreationTimestamp

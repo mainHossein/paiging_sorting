@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
+
 @Primary
 @Service
 @RequiredArgsConstructor
@@ -42,18 +42,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Boolean updateStudent(UUID id, Student student) {
-        int updated;
-        if(student.getName() != null && student.getEmail() == null){
-            updated = studentRepository.updateNameById(student.getName(), id);
-        }else if (student.getName() == null && student.getEmail() != null) {
-            updated = studentRepository.updateEmailById(student.getEmail(), id);
-        }else if (student.getName() != null) {
-            updated = studentRepository.updateNameAndEmailById(
-                    student.getName(), student.getEmail(), id);
-        }else {
-            updated = 0;
-        }
+    public Boolean updateStudent(Long id, Student student) {
+        int updated = studentRepository.updateStudentById(student.getFirstName(), student.getLastName(),
+                student.getEmail(), student.getAcademicField(), student.getPhoneNumber()
+        , student.getBirthDate(), student.getAddress(), student.getId());
         return updated > 0;
     }
 

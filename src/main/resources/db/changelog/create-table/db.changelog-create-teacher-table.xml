@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="1764821089573-1" author="HosseinCh">
+        <createTable tableName="teacher">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar"/>
+            <column name="last_name" type="varchar"/>
+            <column name="email" type="varchar"/>
+            <column name="academic_field" type="varchar"/>
+            <column name="academic_rank" type="varchar"/>
+            <column name="phone_number" type="varchar"/>
+            <column name="birth_date" type="date"/>
+            <column name="city" type="varchar"/>
+            <column name="street" type="varchar"/>
+            <column name="zip_code" type="varchar"/>
+            <column name="country" type="varchar"/>
+            <column name="created_on" type="timestamp"/>
+            <column name="updated_on" type="timestamp"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
